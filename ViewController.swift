@@ -13,65 +13,12 @@ class ViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate
     var calendar = FSCalendar()
     var korDate: String? = nil
     var datesWithEvent = Dictionary<String, Dictionary<String,String>>()
-    var weatherApiKey = "0239cd6474c9457a85b72423243103"
-    var weatherApiUrl = "https://api.weatherapi.com/v1/current.json?key=0239cd6474c9457a85b72423243103&q=Seoul&aqi=yes"
-    
-//    "current": {
-//            "last_updated_epoch": 1711869300,
-//            "last_updated": "2024-03-31 16:15",
-//            "temp_c": 16.0,
-//            "temp_f": 60.8,
-//            "is_day": 1,
-//            "condition": {
-//                "text": "Sunny",
-//                "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png",
-//                "code": 1000
-//            },
-    
     
     @IBOutlet weak var viewMain: UIView!
     
     @IBOutlet weak var mImgMain: UIImageView!
     
     @IBOutlet weak var mTextMain: UITextView!
-    
-    @IBOutlet weak var mTextTemp: UILabel!
-    
-    @IBOutlet weak var mTextCondition: UILabel!
-    
-    func getWeatherText(dateStr: String){
-        URLSession.shared.dataTask(with: URLRequest(url: URL(string: self.weatherApiUrl)!)) { data, response, error in
-            if let d = data {
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: d, options: []) as? Dictionary<String, Any> {
-                        if (json["current"] as? Dictionary<String, Any>) != nil {
-                            let currentDic = json["current"] as! Dictionary<String, Any>
-                            let temp = currentDic["temp_c"] as! Float
-                            if (currentDic["condition"] as? Dictionary<String,Any>) != nil {
-                                let conditionDic = currentDic["condition"] as! Dictionary<String,Any>
-                                let text = conditionDic["text"] as! String
-                                
-                                DispatchQueue.main.async {
-                                    self.mTextCondition.text = text
-                                    self.mTextTemp.text = "\(temp)"
-                                    
-                                    self.datesWithEvent[dateStr]!["temp_c"] = "\(temp)"
-                                    self.datesWithEvent[dateStr]!["condition"] = text
-                                    UserDefaults.standard.set(self.datesWithEvent, forKey: "dates")
-                                }
-                                
-                            }
-                        }
-                    }
-                }
-                catch {
-                    
-                }
-            }
-        }.resume()
-    }
-    
-    
     
     //1. 신규 실제로 주소 뽑아온다.
     //2. 이미 주소가 있으면 호출.
@@ -91,9 +38,6 @@ class ViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                     let word = arrayWord.joined(separator: "+")
                     getImageUrl(dateStr: dateStr, word: word)
                 }
-                if dic["temp_c"] == nil || dic["temp_c"]?.count == 0 {
-                    getWeatherText(dateStr: dateStr)
-                }
                 
             }
             else {
@@ -105,9 +49,6 @@ class ViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                 //랜덤하게 단어를 뽑기.
                 let word = arrayWord.joined(separator: "+")
                 getImageUrl(dateStr: dateStr, word: word)
-                if dic["temp_c"] == nil || dic["temp_c"]?.count == 0 {
-                    getWeatherText(dateStr: dateStr)
-                }
             }
         }
         
@@ -197,7 +138,6 @@ class ViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate
             self.mTextMain.text = ""
         }
         setImg(korDate!)
-        setConAndTemp(korDate!)
     }
     
     func setImg(_ korDate: String){
@@ -213,17 +153,6 @@ class ViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate
                 }
             }
         }
-    }
-    
-    func setConAndTemp(_ korDate: String){
-        self.mTextCondition.text = nil
-        self.mTextTemp.text = nil
-        
-        if let text = self.datesWithEvent[korDate]?["temp_c"], text.count > 0 {
-            self.mTextCondition.text = self.datesWithEvent[korDate]!["condition"]
-            self.mTextTemp.text = self.datesWithEvent[korDate]!["temp_c"]
-        }
-        
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
