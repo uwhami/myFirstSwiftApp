@@ -50,7 +50,6 @@
 		1A0A100C2BA87DB700CC8E68 /* SwiftAppMakeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftAppMakeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0A10102BA87DB700CC8E68 /* SwiftAppMakeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftAppMakeUITests.swift; sourceTree = "<group>"; };
 		1A0A10122BA87DB700CC8E68 /* SwiftAppMakeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftAppMakeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		1A5C81872BB967CD002A3EF2 /* Hello.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Hello.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1AC6917D2BA9BDEA00B9AB5D /* HelloSwift.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = HelloSwift.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A64815E95FDD7B07DD02C064 /* Pods-SwiftAppMake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftAppMake.debug.xcconfig"; path = "Target Support Files/Pods-SwiftAppMake/Pods-SwiftAppMake.debug.xcconfig"; sourceTree = "<group>"; };
 		EDC7B8F57559530C76E1B662 /* Pods_SwiftAppMake.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftAppMake.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,7 +124,6 @@
 				1A0A0FFA2BA87DB600CC8E68 /* LaunchScreen.storyboard */,
 				1A0A0FFD2BA87DB600CC8E68 /* Info.plist */,
 				1AC6917D2BA9BDEA00B9AB5D /* HelloSwift.playground */,
-				1A5C81872BB967CD002A3EF2 /* Hello.playground */,
 			);
 			path = SwiftAppMake;
 			sourceTree = "<group>";
